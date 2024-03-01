@@ -14,7 +14,7 @@ class NumerosTest {
 
 	@ParameterizedTest
 	@MethodSource("capicua")
-	void testEsCapicua(int copiaNum, int numReves, boolean capicua, int numero) {
+	void testEsCapicua(boolean capicua, int numero) {
 		Numeros num = new Numeros(numero);
 		boolean esCap = num.esCapicua();
 		assertEquals(capicua, esCap);
@@ -24,9 +24,9 @@ class NumerosTest {
 		
 		return Stream.of(
 				
-				Arguments.of(1221, 1221, true, 1221),
-				Arguments.of(1231, 1321, false, 1231),
-				Arguments.of(-2222, -2222, false, -2222)
+				Arguments.of(true, 1221),
+				Arguments.of(false, 1231),
+				Arguments.of(false, -2222)
 				
 		);
 		
