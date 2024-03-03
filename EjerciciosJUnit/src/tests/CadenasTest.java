@@ -1,11 +1,7 @@
 package tests;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
-
 import java.util.stream.Stream;
-
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -30,9 +26,12 @@ class CadenasTest {
 		assertEquals(expected, resultado);
 	}
 
-	@Test
-	void testContarPalabra() {
-		fail("Not yet implemented");
+	@ParameterizedTest
+	@MethodSource("cuenta")
+	void testContarPalabra(String frase, String palabra, int expected) {
+		Cadenas cad = new Cadenas(frase);
+		int resultado = cad.contarPalabra(palabra);
+		assertEquals(expected, resultado);
 	}
 
 	private static Stream<Arguments> espacios() {
@@ -52,11 +51,23 @@ class CadenasTest {
 		
 		return Stream.of(
 				
-				Arguments.of("Le voy a pegar a Lorenzo", "ozneroL a ragep yov eL"),
+				Arguments.of("Le voy a pegar a Lorenzo", "ozneroL a ragep a yov eL"),
 				Arguments.of("Chicken", "nekcihC"),
 				Arguments.of("C", "C"),
 				Arguments.of("", "")
 				
 		);
+	}
+	
+	private static Stream<Arguments> cuenta(){
+		
+		return Stream.of(
+				
+				Arguments.of("Le voy a pegar a Lorenzo", "a" , 2),
+				Arguments.of("Chicken", "Chicken",1),
+				Arguments.of("C", "c", 0),
+				Arguments.of(" ", " ", 0)
+		);
+		
 	}
 }
